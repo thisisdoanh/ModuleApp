@@ -11,8 +11,8 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<UserProfile> getUserProfile(String userId) async {
     try {
-      final response = await _dio.get('/api/users/$userId');
-      return UserProfile.fromJson(response.data as Map<String, dynamic>);
+      final response = await _dio.get<Map<String, dynamic>>('/api/users/$userId');
+      return UserProfile.fromJson(response.data!);
     } on DioException catch (e) {
       throw Exception(e.message);
     }

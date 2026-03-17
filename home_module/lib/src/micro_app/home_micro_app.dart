@@ -3,7 +3,7 @@ import 'package:dependency/dependency.dart';
 
 import '../presentation/page/dashboard_page.dart';
 
-class HomeMicroApp extends MicroApp {
+class HomeMicroApp extends MicroApp<void> {
   static const String homeChannel = 'home_channel';
 
   @override

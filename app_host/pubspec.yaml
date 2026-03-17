@@ -37,15 +37,3 @@ flutter:
   generate: true
 flutter_intl:
   enabled: true
-flutter_gen:
-  output: lib/gen/ # Optional (default: lib/gen/)
-  line_length: 100 # Optional (default: 100)
-
-  integrations:
-    flutter_svg: true
-    lottie: true
-
-  assets:
-    outputs:
-      class_name: Assets
-

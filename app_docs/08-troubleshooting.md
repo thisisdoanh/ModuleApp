@@ -365,7 +365,7 @@ void main() async {
 // In AppModule or where Dio is created:
 Dio get dio => Dio()
   ..options = BaseOptions(
-    baseUrl: 'https://api.example.com',  // ← Add base URL!
+    baseUrl: 'https://api.example.com',  // ← Add base_component URL!
     connectTimeout: const Duration(seconds: 30),
     receiveTimeout: const Duration(seconds: 30),
   );

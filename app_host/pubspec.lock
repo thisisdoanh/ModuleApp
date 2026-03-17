@@ -408,6 +408,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2"
+  flutter_gen:
+    dependency: transitive
+    description:
+      name: flutter_gen
+      sha256: "1003c34680624fabea4327655ccd259ca4cb3912d8451868153d997da2195843"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.13.0+1"
   flutter_gen_core:
     dependency: transitive
     description:

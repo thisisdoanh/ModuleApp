@@ -3,7 +3,7 @@ import 'package:dependency/dependency.dart';
 
 import '../presentation/page/login_page.dart';
 
-class AuthMicroApp extends MicroApp {
+class AuthMicroApp extends MicroApp<void> {
   static const String authChannel = 'auth_channel';
 
   @override

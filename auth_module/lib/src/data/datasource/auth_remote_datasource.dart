@@ -16,11 +16,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<AuthToken> login(LoginRequest request) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio.post<Map<String, dynamic>>(
         '/api/auth/login',
         data: request.toJson(),
       );
-      final data = response.data as Map<String, dynamic>;
+      final data = response.data!;
       return AuthToken(
         accessToken: data['access_token'] as String,
         refreshToken: data['refresh_token'] as String,
@@ -36,11 +36,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<AuthToken> refreshToken(String refreshToken) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio.post<Map<String, dynamic>>(
         '/api/auth/refresh',
         data: {'refresh_token': refreshToken},
       );
-      final data = response.data as Map<String, dynamic>;
+      final data = response.data!;
       return AuthToken(
         accessToken: data['access_token'] as String,
         refreshToken: data['refresh_token'] as String,
@@ -56,7 +56,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> logout(String accessToken) async {
     try {
-      await _dio.post(
+      await _dio.post<void>(
         '/api/auth/logout',
         options: Options(headers: {'Authorization': 'Bearer $accessToken'}),
       );
