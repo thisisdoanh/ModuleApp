@@ -15,9 +15,15 @@
       <excludeFolder url="file://$MODULE_DIR$/dev_dependency/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/dev_dependency/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/dev_dependency/build" />
+      <excludeFolder url="file://$MODULE_DIR$/app_networking/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/app_networking/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/app_networking/build" />
       <excludeFolder url="file://$MODULE_DIR$/auth_module/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/auth_module/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/auth_module/build" />
+      <excludeFolder url="file://$MODULE_DIR$/common_ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/common_ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/common_ui/build" />
       <excludeFolder url="file://$MODULE_DIR$/home_module/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/home_module/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/home_module/build" />

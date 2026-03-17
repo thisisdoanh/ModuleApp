@@ -26,12 +26,31 @@ migrate_working_dir/
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
-.dart_tool/
+**/.dart_tool/
 .flutter-plugins-dependencies
+**/.flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
+**/build/
 /coverage/
+
+# pubspec.lock (keep only app_host)
+**/pubspec.lock
+!app_host/pubspec.lock
+
+# Code generation - Freezed
+**/*.freezed.dart
+
+# Code generation - JSON serializable
+**/*.g.dart
+
+# Code generation - Injectable
+**/injection.config.dart
+**/*.injectable.json
+**/*.module.dart
+
+# Code generation - Build runner cache
+**/.build/
 
 # Symbolication related
 app.*.symbols
