@@ -1,4 +1,6 @@
+import 'package:app_localizations/l10n/app_localizations.dart';
 import 'package:dependency/dependency.dart';
+import '../../../auth_module.dart';
 import '../../cubit/auth_cubit.dart';
 import '../../cubit/auth_state.dart';
 
@@ -33,9 +35,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     final password = _passwordController.text.trim();
 
     if (username.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).pleaseFillAllFields)));
       return;
     }
 
@@ -44,6 +46,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
@@ -52,18 +55,16 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           children: [
             // Header
             Text(
-              'Welcome Back',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              l10n.welcomeBack,
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 12.h),
             Text(
-              'Login to your account',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey,
-                  ),
+              l10n.loginToYourAccount,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 40.h),
@@ -73,12 +74,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               controller: _usernameController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                labelText: 'Username or Email',
-                hintText: 'Enter your username',
+                labelText: l10n.usernameOrEmail,
+                hintText: l10n.enterYourUsername,
                 prefixIcon: const Icon(Icons.person_outline),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
               ),
             ),
             SizedBox(height: 16.h),
@@ -88,21 +87,16 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               controller: _passwordController,
               obscureText: _obscurePassword,
               decoration: InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
+                labelText: l10n.password,
+                hintText: l10n.enterYourPassword,
                 prefixIcon: const Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                   ),
-                  onPressed: () =>
-                      setState(() => _obscurePassword = !_obscurePassword),
+                  onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
               ),
             ),
             SizedBox(height: 8.h),
@@ -114,7 +108,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 onPressed: () {
                   // TODO: Navigate to forgot password
                 },
-                child: const Text('Forgot Password?'),
+                child: Text(l10n.forgotPassword),
               ),
             ),
             SizedBox(height: 24.h),
@@ -127,9 +121,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                   onPressed: isLoading ? null : () => _handleLogin(context),
                   style: FilledButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
                   ),
                   child: isLoading
                       ? SizedBox(
@@ -140,7 +132,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text('Login', style: TextStyle(fontSize: 16)),
+                      : Text(l10n.login, style: const TextStyle(fontSize: 16)),
                 );
               },
             ),
@@ -160,14 +152,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.error_outline,
-                            color: Colors.red.shade700, size: 16.r),
+                        Icon(Icons.error_outline, color: Colors.red.shade700, size: 16.r),
                         SizedBox(width: 8.w),
                         Expanded(
-                          child: Text(
-                            state.message,
-                            style: TextStyle(color: Colors.red.shade700),
-                          ),
+                          child: Text(state.message, style: TextStyle(color: Colors.red.shade700)),
                         ),
                       ],
                     ),

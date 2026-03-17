@@ -1,0 +1,20 @@
+{
+  "@@locale": "vi",
+  "ok": "Ok",
+  "cancel": "Hủy",
+  "error": "Lỗi",
+  "welcomeBack": "Chào mừng trở lại",
+  "loginToYourAccount": "Đăng nhập vào tài khoản của bạn",
+  "usernameOrEmail": "Tên đăng nhập hoặc Email",
+  "enterYourUsername": "Nhập tên đăng nhập của bạn",
+  "password": "Mật khẩu",
+  "enterYourPassword": "Nhập mật khẩu của bạn",
+  "forgotPassword": "Quên mật khẩu?",
+  "login": "Đăng nhập",
+  "pleaseFillAllFields": "Vui lòng điền đầy đủ các trường",
+  "home": "Trang chủ",
+  "profile": "Cá nhân",
+  "welcomeBackToDashboard": "Chào mừng trở lại!",
+  "dashboard": "Bảng điều khiển",
+  "accountInfo": "Thông tin tài khoản"
+}

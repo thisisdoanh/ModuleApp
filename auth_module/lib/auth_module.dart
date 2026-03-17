@@ -23,3 +23,6 @@ export 'src/di/auth_package_module.module.dart';
 
 // MicroApp
 export 'src/micro_app/auth_micro_app.dart';
+
+// L10n
+export 'package:app_localizations/app_localizations.dart';

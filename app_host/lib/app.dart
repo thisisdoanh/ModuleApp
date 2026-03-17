@@ -1,3 +1,4 @@
+import 'package:app_localizations/app_localizations.dart';
 import 'package:app_route/app_route.dart';
 import 'package:auth_module/auth_module.dart';
 import 'package:common_ui/common_ui.dart';
@@ -7,7 +8,6 @@ import 'package:home_module/home_module.dart';
 import 'cubit/app_cubit.dart';
 import 'cubit/app_state.dart';
 import 'flavors.dart';
-import 'l10n/app_localizations.dart';
 
 class App extends MicroHostStatelessWidget {
   App({super.key});

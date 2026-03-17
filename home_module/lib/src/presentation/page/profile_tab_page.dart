@@ -1,3 +1,4 @@
+import 'package:app_localizations/app_localizations.dart';
 import 'package:auth_module/auth_module.dart';
 import 'package:common_ui/common_ui.dart';
 import 'package:dependency/dependency.dart';
@@ -11,11 +12,12 @@ class ProfileTabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: AppColors.background,
-          appBar: AppBar(title: const Text('Profile')),
+          appBar: AppBar(title: Text(l10n.profile)),
           body: switch (state) {
             HomeLoading() => const Center(child: AppLoading()),
             HomeLoaded(:final profile) => ListView(
@@ -34,7 +36,7 @@ class ProfileTabPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Account Info',
+                          Text(l10n.accountInfo,
                               style: AppTextStyles.headlineSmall),
                           const SizedBox(height: 12),
                           _InfoRow(label: 'User ID', value: profile.userId),
@@ -62,6 +64,7 @@ class ProfileTabPage extends StatelessWidget {
   }
 
   void _confirmLogout(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     AppDialog.show(
       context,
       title: 'Log Out',
@@ -71,7 +74,7 @@ class ProfileTabPage extends StatelessWidget {
         Navigator.of(context).pop();
         context.read<AuthCubit>().logout();
       },
-      secondaryLabel: 'Cancel',
+      secondaryLabel: l10n.cancel,
       onSecondary: () => Navigator.of(context).pop(),
     );
   }

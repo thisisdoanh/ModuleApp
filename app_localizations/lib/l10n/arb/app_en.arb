@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "ok": "Ok",
+  "cancel": "Cancel",
+  "error": "Error",
+  "welcomeBack": "Welcome Back",
+  "loginToYourAccount": "Login to your account",
+  "usernameOrEmail": "Username or Email",
+  "enterYourUsername": "Enter your username",
+  "password": "Password",
+  "enterYourPassword": "Enter your password",
+  "forgotPassword": "Forgot Password?",
+  "login": "Login",
+  "pleaseFillAllFields": "Please fill all fields",
+  "home": "Home",
+  "profile": "Profile",
+  "welcomeBackToDashboard": "Welcome back!",
+  "dashboard": "Dashboard",
+  "accountInfo": "Account Info"
+}

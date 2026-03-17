@@ -1,3 +1,4 @@
+import 'package:app_localizations/app_localizations.dart';
 import 'package:common_ui/common_ui.dart';
 import 'package:dependency/dependency.dart';
 
@@ -10,12 +11,13 @@ class HomeTabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: AppColors.background,
           appBar: AppBar(
-            title: const Text('Home'),
+            title: Text(l10n.home),
             actions: [
               IconButton(
                 icon: const Icon(Icons.refresh),
@@ -36,7 +38,7 @@ class HomeTabPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Welcome back!',
+                            Text(l10n.welcomeBackToDashboard,
                                 style: AppTextStyles.bodySmall),
                             const SizedBox(height: 4),
                             UserProfileWidget(profile: profile),
@@ -51,7 +53,7 @@ class HomeTabPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Dashboard',
+                            Text(l10n.dashboard,
                                 style: AppTextStyles.headlineSmall),
                             const SizedBox(height: 8),
                             Text(

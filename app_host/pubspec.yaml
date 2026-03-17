@@ -26,6 +26,8 @@ dependencies:
     path: ../app_route
   app_networking:
     path: ../app_networking
+  app_localizations:
+    path: ../app_localizations
 
 dev_dependencies:
   flutter_lints: ^6.0.0
