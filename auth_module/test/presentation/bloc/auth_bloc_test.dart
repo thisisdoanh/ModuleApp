@@ -1,5 +1,5 @@
 import 'package:auth_module/auth_module.dart';
-import 'package:dev_dependency/dev_dependency.dart';
+import 'package:test_dependency/test_dependency.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
 

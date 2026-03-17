@@ -20,15 +20,11 @@ dependencies:
     path: ../app_route
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  flutter_lints: ^6.0.0
   dev_dependency:
     path: ../dev_dependency
-  flutter_lints: ^6.0.0
-  build_runner: ^2.12.2
-  injectable_generator: ^2.12.1
-  freezed: ^3.2.5
-  json_serializable: ^6.9.5
+  test_dependency:
+    path: ../test_dependency
 
 flutter:
   uses-material-design: true

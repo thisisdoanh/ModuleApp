@@ -13,6 +13,8 @@ export 'src/presentation/page/dashboard_page.dart';
 
 // DI
 export 'src/di/home_di_module.dart';
+export 'src/di/home_package_module.dart';
+export 'src/di/home_package_module.module.dart';
 
 // MicroApp
 export 'src/micro_app/home_micro_app.dart';

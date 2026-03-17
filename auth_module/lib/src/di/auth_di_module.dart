@@ -8,11 +8,6 @@ import '../service/token_service_impl.dart';
 
 @module
 abstract class AuthDiModule {
-  @singleton
-  FlutterSecureStorage get secureStorage => const FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true),
-      );
-
   @lazySingleton
   TokenService tokenService(FlutterSecureStorage storage) =>
       TokenServiceImpl(storage);

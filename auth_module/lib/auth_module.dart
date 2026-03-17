@@ -17,6 +17,8 @@ export 'src/presentation/page/login_page.dart';
 
 // DI
 export 'src/di/auth_di_module.dart';
+export 'src/di/auth_package_module.dart';
+export 'src/di/auth_package_module.module.dart';
 
 // MicroApp
 export 'src/micro_app/auth_micro_app.dart';

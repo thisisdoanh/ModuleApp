@@ -1,15 +1,17 @@
+import 'package:app_networking/app_networking.dart';
+import 'package:auth_module/auth_module.dart';
 import 'package:dependency/dependency.dart';
+import 'package:home_module/home_module.dart';
 
 import 'injection.config.dart';
 
 final getIt = GetIt.instance;
 
-/// Initialize all dependencies.
-///
-/// Uses injectable's generated code to register:
-/// - AppModule: SharedPreferences (async), Dio
-/// - AuthDiModule: FlutterSecureStorage, TokenService, AuthRepository, AuthCubit
-///
-/// Run `flutter pub run build_runner build` to regenerate [injection.config.dart].
-@InjectableInit()
+@InjectableInit(
+  externalPackageModulesAfter: [
+    ExternalModule(AppNetworkingPackageModule),
+    ExternalModule(AuthModulePackageModule),
+    ExternalModule(HomeModulePackageModule),
+  ],
+)
 Future<void> configureDependencies() async => getIt.init();

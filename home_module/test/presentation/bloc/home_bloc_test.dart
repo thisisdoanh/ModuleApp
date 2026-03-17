@@ -1,4 +1,4 @@
-import 'package:dev_dependency/dev_dependency.dart';
+import 'package:test_dependency/test_dependency.dart';
 import 'package:home_module/home_module.dart';
 
 class MockHomeRepository extends Mock implements HomeRepository {}

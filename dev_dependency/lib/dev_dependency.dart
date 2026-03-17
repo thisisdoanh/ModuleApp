@@ -1,3 +1,9 @@
-export 'package:flutter_test/flutter_test.dart';
-export 'package:bloc_test/bloc_test.dart';
-export 'package:mocktail/mocktail.dart';
+// Code generation hub.
+// Add `dev_dependency: path: ../dev_dependency` to your package's
+// dev_dependencies to get access to all generators:
+//   - build_runner
+//   - freezed
+//   - injectable_generator
+//   - json_serializable
+//   - flutter_gen_runner
+//   - hive_ce_generator

@@ -24,19 +24,13 @@ dependencies:
     path: ../common_ui
   app_route:
     path: ../app_route
+  app_networking:
+    path: ../app_networking
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   flutter_lints: ^6.0.0
   dev_dependency:
     path: ../dev_dependency
-
-  # Code generation
-  build_runner: ^2.12.2
-  injectable_generator: ^2.12.1
-  freezed: ^3.2.5
-  flutter_gen_runner: ^5.13.0+1
 
 flutter:
   uses-material-design: true

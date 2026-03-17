@@ -1,0 +1,23 @@
+name: test_dependency
+description: "Shared test packages for the monorepo - re-exports flutter_test, bloc_test, mocktail"
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.11.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+
+  bloc_test: ^10.0.0
+  mocktail:
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
