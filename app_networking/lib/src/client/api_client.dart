@@ -1,47 +1,206 @@
+import 'package:app_networking/src/model/base_response_model.dart';
 import 'package:dependency/dependency.dart';
 
-/// Typed HTTP client wrapping Dio.
-/// Use this instead of raw Dio in datasources.
-class ApiClient {
-  ApiClient(this._dio);
+typedef ApiResponseToModelParser<T> = T Function(Map<String, dynamic> json);
 
-  final Dio _dio;
-
-  Future<Response<T>> get<T>(
+abstract class ApiHandler {
+  // parser JSON data {} => Object
+  Future<BaseResponseModel<T>> post<T>(
     String path, {
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     Options? options,
-  }) =>
-      _dio.get<T>(path, queryParameters: queryParameters, options: options);
+  });
 
-  Future<Response<T>> post<T>(
+  // parser JSON data {} => Object
+  Future<BaseResponseModel<T>> get<T>(
     String path, {
-    Object? data,
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? queryParameters,
     Options? options,
-  }) =>
-      _dio.post<T>(path, data: data, options: options);
+  });
 
-  Future<Response<T>> put<T>(
+  // parser JSON data {} => Object
+  Future<BaseResponseModel<T>> put<T>(
     String path, {
-    Object? data,
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
     Options? options,
-  }) =>
-      _dio.put<T>(path, data: data, options: options);
+  });
 
-  Future<Response<T>> patch<T>(
+  // parser JSON data {} => Object
+  Future<BaseResponseModel<T>> patch<T>(
     String path, {
-    Object? data,
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
     Options? options,
-  }) =>
-      _dio.patch<T>(path, data: data, options: options);
+  });
 
-  Future<Response<T>> delete<T>(
+  // parser JSON data {} => Object
+  Future<BaseResponseModel<T>> delete<T>(
     String path, {
-    Object? data,
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
     Options? options,
-  }) =>
-      _dio.delete<T>(path, data: data, options: options);
+  });
+}
 
-  /// Access the underlying Dio instance for advanced usage.
-  Dio get dio => _dio;
+class ApiClient implements ApiHandler {
+  ApiClient({required this.dio, required this.baseUrl});
+
+  final String baseUrl;
+  final Dio dio;
+
+  @override
+  Future<BaseResponseModel<T>> post<T>(
+    String path, {
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) {
+    return _remapError(() async {
+      final response = await dio.post(
+        path,
+        data: body,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      if (response.statusCode != null &&
+          response.statusCode! < 300 &&
+          response.data.toString().isEmpty) {
+        return BaseResponseModel<T>(null, 'Empty Response');
+      }
+      return BaseResponseModel<T>.fromJson(
+        response.data,
+        (json) => parser(json as Map<String, dynamic>),
+      );
+    });
+  }
+
+  @override
+  Future<BaseResponseModel<T>> get<T>(
+    String path, {
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) {
+    return _remapError(() async {
+      final response = await dio.get(path, queryParameters: queryParameters, options: options);
+      if (response.statusCode != null &&
+          response.statusCode! < 300 &&
+          response.data.toString().isEmpty) {
+        return BaseResponseModel<T>(null, 'Empty Response');
+      }
+      return BaseResponseModel<T>.fromJson(
+        response.data,
+        (json) => parser(json as Map<String, dynamic>),
+      );
+    });
+  }
+
+  @override
+  Future<BaseResponseModel<T>> delete<T>(
+    String path, {
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) {
+    return _remapError(() async {
+      final response = await dio.delete(
+        path,
+        data: body,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      if (response.statusCode != null &&
+          response.statusCode! < 300 &&
+          response.data.toString().isEmpty) {
+        return BaseResponseModel<T>(null, 'Empty Response');
+      }
+      return BaseResponseModel<T>.fromJson(
+        response.data,
+        (json) => parser(json as Map<String, dynamic>),
+      );
+    });
+  }
+
+  @override
+  Future<BaseResponseModel<T>> put<T>(
+    String path, {
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) {
+    return _remapError(() async {
+      final response = await dio.put(
+        path,
+        data: body,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      if (response.statusCode != null &&
+          response.statusCode! < 300 &&
+          response.data.toString().isEmpty) {
+        return BaseResponseModel<T>(null, 'Empty Response');
+      }
+      return BaseResponseModel<T>.fromJson(
+        response.data,
+        (json) => parser(json as Map<String, dynamic>),
+      );
+    });
+  }
+
+  @override
+  Future<BaseResponseModel<T>> patch<T>(
+    String path, {
+    required ApiResponseToModelParser<T> parser,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) {
+    return _remapError(() async {
+      final response = await dio.patch(
+        path,
+        data: body,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      if (response.statusCode != null &&
+          response.statusCode! < 300 &&
+          response.data.toString().isEmpty) {
+        return BaseResponseModel<T>(null, 'Empty Response');
+      }
+      return BaseResponseModel<T>.fromJson(
+        response.data,
+        (json) => parser(json as Map<String, dynamic>),
+      );
+    });
+  }
+
+  Future<T> _remapError<T>(ValueGetter<Future<T>> func) async {
+    try {
+      return await func();
+    } catch (e) {
+      throw await _apiErrorToInternalError(e);
+    }
+  }
+
+  Future<dynamic> _apiErrorToInternalError(Object e) async {
+    // if (e is DioException) {
+    //   if (e.type == DioExceptionType.connectionTimeout ||
+    //       e.type == DioExceptionType.receiveTimeout ||
+    //       (e.type == DioExceptionType.unknown && e.error is SocketException)) {
+    //     return NetworkIssueException();
+    //   }
+    //   return ServerException(e);
+    // }
+    return e;
+  }
 }

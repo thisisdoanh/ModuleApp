@@ -2,11 +2,12 @@
 export 'src/data/model/login_request.dart';
 export 'src/data/model/auth_token.dart';
 
+// Datasource
+export 'src/data/datasource/local/auth_local_datasource.dart';
+export 'src/data/datasource/network/auth_network_datasource.dart';
+
 // Repository
 export 'src/data/repository/auth_repository.dart';
-
-// Service
-export 'src/service/token_service.dart';
 
 // Cubit
 export 'src/presentation/cubit/auth_cubit.dart';

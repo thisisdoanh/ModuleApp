@@ -16,9 +16,12 @@ dependencies:
     path: ../common_ui
   app_route:
     path: ../app_route
+  app_networking:
+    path: ../app_networking
 
 dev_dependencies:
   flutter_lints: ^6.0.0
+  build_runner: ^2.12.2
   dev_dependency:
     path: ../dev_dependency
   test_dependency:

@@ -1,3 +1,5 @@
+import 'package:app_networking/app_networking.dart';
+import 'package:app_route/app_route.dart';
 import 'package:dependency/dependency.dart';
 
 import '../cubit/app_cubit.dart';
@@ -14,4 +16,10 @@ abstract class AppModule {
 
   @factory
   AppCubit appCubit(SharedPreferences prefs) => AppCubit(prefs);
+
+  /// Called by [SessionInterceptor] when the refresh token is expired.
+  /// Clears the session and redirects to the login screen.
+  @singleton
+  SessionExpiredCallback get sessionExpiredCallback =>
+      SessionExpiredCallback(AppNavigator.toLogin);
 }

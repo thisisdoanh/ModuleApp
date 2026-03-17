@@ -1,27 +1,30 @@
+import 'package:app_networking/app_networking.dart';
 import 'package:dependency/dependency.dart';
-import '../data/datasource/auth_remote_datasource.dart';
+
+import '../data/datasource/local/auth_local_datasource.dart';
+import '../data/datasource/local/auth_local_datasource_impl.dart';
+import '../data/datasource/network/auth_network_datasource.dart';
+import '../data/datasource/network/auth_network_datasource_impl.dart';
 import '../data/repository/auth_repository.dart';
 import '../data/repository/auth_repository_impl.dart';
 import '../presentation/cubit/auth_cubit.dart';
-import '../service/token_service.dart';
-import '../service/token_service_impl.dart';
 
 @module
 abstract class AuthDiModule {
-  @lazySingleton
-  TokenService tokenService(FlutterSecureStorage storage) =>
-      TokenServiceImpl(storage);
+  @Singleton(as: AuthLocalDataSource)
+  AuthLocalDataSourceImpl authLocalDataSource(FlutterSecureStorage storage) =>
+      AuthLocalDataSourceImpl(storage);
 
   @lazySingleton
-  AuthRemoteDataSource authRemoteDataSource(Dio dio) =>
-      AuthRemoteDataSourceImpl(dio);
+  AuthNetworkDataSource authNetworkDataSource(ApiHandler apiClient) =>
+      AuthNetworkDataSourceImpl(apiClient);
 
   @lazySingleton
   AuthRepository authRepository(
-    AuthRemoteDataSource remoteDataSource,
-    TokenService tokenService,
+    AuthNetworkDataSource network,
+    AuthLocalDataSource local,
   ) =>
-      AuthRepositoryImpl(remoteDataSource, tokenService);
+      AuthRepositoryImpl(network, local);
 
   @factory
   AuthCubit authCubit(AuthRepository repository) => AuthCubit(repository);

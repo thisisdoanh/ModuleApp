@@ -1,63 +1,62 @@
-import '../datasource/auth_remote_datasource.dart';
+import '../datasource/local/auth_local_datasource.dart';
+import '../datasource/network/auth_network_datasource.dart';
 import '../model/auth_token.dart';
 import '../model/login_request.dart';
-import '../../service/token_service.dart';
 import 'auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource _remoteDataSource;
-  final TokenService _tokenService;
+  AuthRepositoryImpl(this._network, this._local);
 
-  AuthRepositoryImpl(this._remoteDataSource, this._tokenService);
+  final AuthNetworkDataSource _network;
+  final AuthLocalDataSource _local;
 
   @override
   Future<AuthToken> login(String username, String password) async {
-    final request = LoginRequest(username: username, password: password);
-    final token = await _remoteDataSource.login(request);
-    await _tokenService.saveToken(
-      token.accessToken,
-      token.refreshToken,
-      token.userId,
-      token.username,
-      token.expiresAt,
+    final token = await _network.login(
+      LoginRequest(username: username, password: password),
+    );
+    await _local.saveToken(
+      accessToken: token.accessToken,
+      refreshToken: token.refreshToken,
+      userId: token.userId,
+      username: token.username,
+      expiresAt: token.expiresAt,
     );
     return token;
   }
 
   @override
   Future<void> logout() async {
-    final accessToken = await _tokenService.getAccessToken();
-    if (accessToken != null) {
-      await _remoteDataSource.logout(accessToken);
-    }
-    await _tokenService.clearTokens();
+    final accessToken = await _local.getAccessToken();
+    if (accessToken != null) await _network.logout(accessToken);
+    await _local.clearToken();
   }
 
   @override
   Future<AuthToken> refreshToken() async {
-    final refreshToken = await _tokenService.getRefreshToken();
+    final refreshToken = await _local.getRefreshToken();
     if (refreshToken == null) throw Exception('No refresh token available');
 
-    final newToken = await _remoteDataSource.refreshToken(refreshToken);
-    await _tokenService.saveToken(
-      newToken.accessToken,
-      newToken.refreshToken,
-      newToken.userId,
-      newToken.username,
-      newToken.expiresAt,
+    final newToken = await _network.refreshToken(refreshToken);
+    await _local.saveToken(
+      accessToken: newToken.accessToken,
+      refreshToken: newToken.refreshToken,
+      userId: newToken.userId,
+      username: newToken.username,
+      expiresAt: newToken.expiresAt,
     );
     return newToken;
   }
 
   @override
-  Future<String?> getAccessToken() => _tokenService.getAccessToken();
+  Future<String?> getAccessToken() => _local.getAccessToken();
 
   @override
-  Future<String?> getUserId() => _tokenService.getUserId();
+  Future<String?> getUserId() => _local.getUserId();
 
   @override
-  Future<bool> isLoggedIn() => _tokenService.isLoggedIn();
+  Future<bool> isLoggedIn() => _local.isLoggedIn();
 
   @override
-  Future<bool> isTokenExpired() => _tokenService.isTokenExpired();
+  Future<bool> isTokenExpired() => _local.isTokenExpired();
 }
