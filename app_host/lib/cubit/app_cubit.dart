@@ -1,8 +1,9 @@
+import 'package:common_ui/common_ui.dart';
 import 'package:dependency/dependency.dart';
 
 import 'app_state.dart';
 
-class AppCubit extends Cubit<AppState> {
+class AppCubit extends BaseCubit<AppState> {
   AppCubit(this._prefs) : super(_loadInitialState(_prefs));
 
   final SharedPreferences _prefs;
@@ -10,22 +11,22 @@ class AppCubit extends Cubit<AppState> {
   static const _themeKey = 'app_theme';
   static const _localeKey = 'app_locale';
 
+  @override
+  Future<void> load() async {}
+
   static AppState _loadInitialState(SharedPreferences prefs) {
     final savedTheme = prefs.getString(_themeKey);
     final themeMode = ThemeMode.values.firstWhere(
       (m) => m.name == savedTheme,
       orElse: () => ThemeMode.system,
     );
-
     final savedLocale = prefs.getString(_localeKey);
-    final locale =
-        savedLocale != null ? Locale(savedLocale) : const Locale('vi');
-
+    final locale = savedLocale != null ? Locale(savedLocale) : const Locale('vi');
     return AppState(themeMode: themeMode, locale: locale);
   }
 
   Future<void> setTheme(ThemeMode mode) async {
-    emit(state.copyWith(themeMode: mode));
+    safeEmit(state.copyWith(themeMode: mode));
     await _prefs.setString(_themeKey, mode.name);
   }
 
@@ -35,7 +36,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Future<void> setLocale(Locale locale) async {
-    emit(state.copyWith(locale: locale));
+    safeEmit(state.copyWith(locale: locale));
     await _prefs.setString(_localeKey, locale.languageCode);
   }
 }

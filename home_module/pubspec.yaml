@@ -20,6 +20,7 @@ dependencies:
     path: ../app_route
 
 dev_dependencies:
+  build_runner: ^2.12.2
   flutter_lints: ^6.0.0
   dev_dependency:
     path: ../dev_dependency

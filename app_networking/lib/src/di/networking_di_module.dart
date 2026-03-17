@@ -11,6 +11,9 @@ import '../token/token_provider.dart';
 
 @module
 abstract class NetworkingDiModule {
+  @singleton
+  TokenProvider tokenProvider(SharedPreferences prefs) => TokenProvider(prefs);
+
   @Named('logging_interceptor')
   @singleton
   Interceptor get loggingInterceptor => PrettyDioLogger(
@@ -65,6 +68,6 @@ abstract class NetworkingDiModule {
     return dio;
   }
 
-  @singleton
+  @Singleton(as: ApiHandler)
   ApiClient apiClient(Dio dio) => ApiClient(dio: dio, baseUrl: NetworkConfig.baseUrl);
 }

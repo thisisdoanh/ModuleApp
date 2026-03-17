@@ -18,8 +18,12 @@ abstract class AppModule {
   AppCubit appCubit(SharedPreferences prefs) => AppCubit(prefs);
 
   /// Called by [SessionInterceptor] when the refresh token is expired.
-  /// Clears the session and redirects to the login screen.
-  @singleton
-  SessionExpiredCallback get sessionExpiredCallback =>
-      SessionExpiredCallback(AppNavigator.toLogin);
+  /// Clears the token cache and redirects to the login screen.
+  @Named('session_expired_callback')
+  @lazySingleton
+  SessionExpiredCallback sessionExpiredCallback(TokenProvider tokenProvider) =>
+      SessionExpiredCallback(() {
+        tokenProvider.clearToken();
+        AppNavigator.toLogin();
+      });
 }

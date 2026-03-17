@@ -1,27 +1,30 @@
-import 'package:dependency/dependency.dart';
+import 'package:common_ui/common_ui.dart';
 
 import '../../data/repository/home_repository.dart';
 import 'home_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit(this._repository) : super(const HomeState.initial());
 
   final HomeRepository _repository;
 
+  @override
+  Future<void> load() => refresh();
+
   Future<void> loadProfile(String userId) async {
-    emit(const HomeState.loading());
+    safeEmit(const HomeState.loading());
     try {
       final profile = await _repository.getUserProfile(userId);
-      emit(HomeState.loaded(profile: profile, currentTabIndex: 0));
+      safeEmit(HomeState.loaded(profile: profile, currentTabIndex: 0));
     } catch (e) {
-      emit(HomeState.error(message: e.toString()));
+      safeEmit(HomeState.error(message: e.toString()));
     }
   }
 
   void changeTab(int tabIndex) {
     final current = state;
     if (current is HomeLoaded) {
-      emit(HomeState.loaded(
+      safeEmit(HomeState.loaded(
         profile: current.profile,
         currentTabIndex: tabIndex,
       ));

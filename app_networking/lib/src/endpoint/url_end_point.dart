@@ -24,9 +24,9 @@ abstract class _BaseEndPoint {
 class AuthEndPoint extends _BaseEndPoint {
   const AuthEndPoint();
 
-  String get login => '/api/auth/login';
+  String get login => 'https://dummyjson.com/auth/login';
   String get signUp => '/api/auth/register';
-  String get refreshToken => '/api/auth/refresh';
+  String get refreshToken => 'https://dummyjson.com/auth/refresh';
   String get logout => '/api/auth/logout';
 }
 

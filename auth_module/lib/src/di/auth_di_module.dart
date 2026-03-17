@@ -23,8 +23,9 @@ abstract class AuthDiModule {
   AuthRepository authRepository(
     AuthNetworkDataSource network,
     AuthLocalDataSource local,
+    TokenProvider tokenProvider,
   ) =>
-      AuthRepositoryImpl(network, local);
+      AuthRepositoryImpl(network, local, tokenProvider);
 
   @factory
   AuthCubit authCubit(AuthRepository repository) => AuthCubit(repository);
