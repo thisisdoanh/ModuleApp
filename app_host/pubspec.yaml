@@ -1,0 +1,57 @@
+name: app_host
+description: "A new Flutter project."
+publish_to: none
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  dependency:
+    path: ../dependency
+
+  # Modules
+  auth_module:
+    path: ../auth_module
+  home_module:
+    path: ../home_module
+  common_ui:
+    path: ../common_ui
+  app_route:
+    path: ../app_route
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  dev_dependency:
+    path: ../dev_dependency
+
+  # Code generation
+  build_runner: ^2.12.2
+  injectable_generator: ^2.12.1
+  freezed: ^3.2.5
+  flutter_gen_runner: ^5.13.0+1
+
+flutter:
+  uses-material-design: true
+  generate: true
+flutter_intl:
+  enabled: true
+flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  line_length: 100 # Optional (default: 100)
+
+  integrations:
+    flutter_svg: true
+    lottie: true
+
+  assets:
+    outputs:
+      class_name: Assets
+

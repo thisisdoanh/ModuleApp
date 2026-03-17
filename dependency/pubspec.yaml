@@ -1,0 +1,72 @@
+name: dependency
+description: "Shared Flutter production dependencies"
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
+
+  # Flavor
+  flutter_flavorizr: ^2.4.2
+
+  # State management
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.8
+
+  # Dependency Injection
+  get_it: ^9.2.1
+  injectable: ^2.7.1+4
+  freezed: ^3.2.5
+
+  # Annotation
+  json_annotation: ^4.11.0
+  freezed_annotation: ^3.1.0
+  json_serializable: ^6.9.5
+
+  # Local storage
+  shared_preferences: ^2.5.4
+  flutter_secure_storage: ^10.0.0
+  hive_ce: ^2.19.3
+  hive_ce_flutter: ^2.3.4
+
+  # Networking
+  dio: ^5.9.2
+  requests_inspector: ^5.4.0
+  pretty_dio_logger: ^1.4.0
+
+  # Image
+  flutter_svg: ^2.2.4
+  cached_network_image: ^3.4.1
+
+  # Utils
+  package_info_plus: ^9.0.0
+  share_plus: ^12.0.1
+  permission_handler: ^12.0.1
+  device_info_plus: ^12.3.0
+  path_provider: ^2.1.5
+  fluttertoast: ^9.0.0
+  collection: ^1.19.1
+
+  # UI
+  flutter_screenutil: ^5.9.3
+  flutter_micro_app: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.12.2
+  injectable_generator: ^2.12.1
+  flutter_gen_runner: ^5.13.0+1
+  hive_ce_generator: ^1.11.1
+
+flutter:
+  uses-material-design: true

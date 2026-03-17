@@ -1,0 +1,32 @@
+name: auth_module
+description: Auth module - handles all authentication (login, logout, token management)
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.11.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dependency:
+    path: ../dependency
+  common_ui:
+    path: ../common_ui
+  app_route:
+    path: ../app_route
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  dev_dependency:
+    path: ../dev_dependency
+  flutter_lints: ^6.0.0
+  build_runner: ^2.12.2
+  injectable_generator: ^2.12.1
+  freezed: ^3.2.5
+  json_serializable: ^6.9.5
+
+flutter:
+  uses-material-design: true

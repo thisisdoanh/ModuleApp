@@ -1,0 +1,21 @@
+flavors:
+  dev:
+    app:
+      name: "Dev: Module App"
+
+    android:
+      applicationId: "com.template.monorepo.exam.dev"
+    ios:
+      bundleId: "com.template.bloc.managermant.dev"
+  #      firebase:
+  #        config: "android/app/src/dev/google-services.json"
+
+  prod:
+    app:
+      name: "Module App"
+    android:
+      applicationId: "com.template.monorepo.exam"
+    ios:
+      bundleId: "com.template.bloc.managermant"
+#      firebase:
+#        config: "android/app/src/prod/google-services.json"
